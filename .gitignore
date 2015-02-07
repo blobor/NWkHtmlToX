@@ -4,7 +4,11 @@
 # User-specific files
 *.suo
 *.user
+*.userprefs
+*.sln.ide
 *.sln.docstates
+*.cache
+
 
 # Build results
 [Dd]ebug/
@@ -17,6 +21,7 @@ build/
 bld/
 [Bb]in/
 [Oo]bj/
+artifacts/
 
 # Roslyn cache directories
 *.ide/
