@@ -6,6 +6,16 @@
     },
 
     "dependencies": {
+        "NWkHtmlToX": "",
+        "System.Runtime": "4.0.20-*",
+
+        "xunit": "2.0.0-*",
+        "xunit.runner.aspnet": "2.0.0-*",
+        "xunit.runner.visualstudio": "2.0.0-*"
+    },
+
+    "commands": {
+        "test": "xunit.runner.aspnet"
     },
 
     "frameworks": {
@@ -28,8 +38,6 @@
         },
         "aspnetcore50": {
             "dependencies": {
-                "System.Runtime": "4.0.20-*",
-                "Microsoft.Win32.Registry": "4.0.0-*"
             }
         }
     }
