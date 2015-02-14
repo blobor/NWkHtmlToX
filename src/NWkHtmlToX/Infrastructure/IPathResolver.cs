@@ -1,9 +1,9 @@
-﻿namespace NWkHtmlToX.Core.Infrastructure {
+﻿namespace NWkHtmlToX.Infrastructure {
      
     /// <summary>
     /// Implementations of this interface are used for resolving path.
     /// </summary>
-    internal interface IPathResolver {
+    public interface IPathResolver {
 
         /// <summary>
         /// Resolves a path.
