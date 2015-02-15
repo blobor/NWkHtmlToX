@@ -6,7 +6,7 @@
     },
 
     "dependencies": {
-        "NWkHtmlToX.Core": { "version": "", "type": "build" }
+        "NWkHtmlToX.Core": { "version": "0.1-*", "type": "build" }
     },
 
     "frameworks": {

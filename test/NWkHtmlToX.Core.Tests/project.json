@@ -6,8 +6,9 @@
     },
 
     "dependencies": {
-        "NWkHtmlToX": "",
+        "NWkHtmlToX.Core": { "version": "0.1-*", "type": "build" },
         "System.Runtime": "4.0.20-*",
+        "System.Threading.Tasks": "4.0.10-*",
 
         "xunit": "2.0.0-*",
         "xunit.runner.aspnet": "2.0.0-*"
@@ -23,10 +24,6 @@
         "net452": { },
 
         "aspnet50": { },
-        "aspnetcore50": {
-            "dependencies": {
-                "System.Globalization": "4.0.10-*"
-            }
-        }
+        "aspnetcore50": { }
     }
 }
