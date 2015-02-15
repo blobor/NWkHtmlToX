@@ -6,7 +6,7 @@ using Xunit;
 namespace NWkHtmlToX.Tests.Infrastructure.PathResolvers {
     public class PdfDllRegistryPathResolverTests {
 
-        private IPathResolver _registryPathResolver;
+        private readonly IPathResolver _registryPathResolver;
 
         public PdfDllRegistryPathResolverTests() {
             _registryPathResolver = new PdfDllRegistryPathResolver();

@@ -8,13 +8,15 @@ namespace NWkHtmlToX.Infrastructure.PathResolvers {
 
         protected RegistryKey GetLocalMachineRegistryKey() {
 #if ASPNETCORE50
-            var registryView = RegistryView.Default;
+            // Currently in .NET Core there are no possibility to check is system is 64 bit
+            return Registry.LocalMachine;
 #else
             var registryView = Environment.Is64BitOperatingSystem
                                                           ? RegistryView.Registry64
                                                           : RegistryView.Registry32;
-#endif
+
             return RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, registryView);
+#endif
         }
 
         public abstract string ResolvePath();
