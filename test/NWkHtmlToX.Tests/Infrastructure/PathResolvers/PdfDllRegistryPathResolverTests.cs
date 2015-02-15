@@ -14,8 +14,12 @@ namespace NWkHtmlToX.Tests.Infrastructure.PathResolvers {
 
         [Fact]
         public void DefaultResultShouldNotBeNull() {
+            // Arrange
+
+            // Act
             var result = _registryPathResolver.ResolvePath();
 
+            // Assert
             Assert.NotNull(result);
         }
     }
