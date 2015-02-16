@@ -2,9 +2,8 @@
 using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
-using NWkHtmlToX.Core.Native.PlatformApi;
 
-namespace NWkHtmlToX.Core.Native {
+namespace NWkHtmlToX.Core.Native.Win32 {
     public class WindowsLibraryLoader : ILibraryLoader {
 
         public IntPtr LoadLibrary(string dllPath) {

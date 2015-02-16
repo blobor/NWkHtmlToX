@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.IO;
 using NWkHtmlToX.Core.Native;
+using NWkHtmlToX.Core.Native.Win32;
 using Xunit;
 
 namespace NWkHtmlToX.Core.Tests.Native {
@@ -31,6 +32,18 @@ namespace NWkHtmlToX.Core.Tests.Native {
 
             // Act, Assert
             Assert.Throws<FileNotFoundException>(testCode);
+        }
+
+        [Fact]
+        public void LoadLibraryMethodShouldLoadLibraryByPathAndReturnValidHandle() {
+            // Arrange
+            const string dllPath = @"C:\Windows\System32\user32.dll";
+
+            // Act
+            var handle = _windowsLibraryLoader.LoadLibrary(dllPath);
+
+            // Assert
+            Assert.NotEqual(IntPtr.Zero, handle);
         }
 
         [Fact]

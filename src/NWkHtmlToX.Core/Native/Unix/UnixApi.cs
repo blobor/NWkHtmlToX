@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace NWkHtmlToX.Core.Native.PlatformApi {
+namespace NWkHtmlToX.Core.Native.PlatformApi.Unix {
 
 #if !ASPNETCORE50
     [System.Security.SuppressUnmanagedCodeSecurity]
