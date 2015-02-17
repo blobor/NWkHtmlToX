@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using NWkHtmlToX.Core.Native;
@@ -44,6 +45,17 @@ namespace NWkHtmlToX.Core.Tests.Native {
 
             // Assert
             Assert.NotEqual(IntPtr.Zero, handle);
+        }
+
+        [Fact]
+        public void LoadLibraryMethodShouldThrowExcpetionIfHandleIsNotValid() {
+            // Arrange
+            // wkhtmltox should run only in single appartment mode, in another case it will crash
+            const string dllPath = @"C:\Program Files\wkhtmltopdf\bin\wkhtmltox.dll";
+            Action testFunction = () => _windowsLibraryLoader.LoadLibrary(dllPath);
+
+            // Act, Assert
+            Assert.Throws<Win32Exception>(testFunction);
         }
 
         [Fact]

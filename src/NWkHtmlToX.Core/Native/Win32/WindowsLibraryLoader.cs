@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Globalization;
+using System.ComponentModel;
 using System.IO;
 using System.Runtime.InteropServices;
 
@@ -15,10 +15,7 @@ namespace NWkHtmlToX.Core.Native.Win32 {
             var handler = WindowsApi.LoadLibrary(dllPath);
 
             if (handler == IntPtr.Zero) {
-                var errorCode = Marshal.GetLastWin32Error();
-                var message = String.Format("Could not load library. Error code: {0}", errorCode.ToString(NumberFormatInfo.InvariantInfo));
-
-                throw new InvalidOperationException(message);
+                throw new Win32Exception(Marshal.GetLastWin32Error());
             }
 
             return handler;
@@ -34,11 +31,8 @@ namespace NWkHtmlToX.Core.Native.Win32 {
 
             var procedure = WindowsApi.GetProcAddress(handle, procedureName);
 
-            if(procedure == IntPtr.Zero) {
-                var errorCode = Marshal.GetLastWin32Error();
-                var message = String.Format("Could not find procedure. Error code: {0}", errorCode.ToString(NumberFormatInfo.InvariantInfo));
-
-                throw new InvalidOperationException(message);
+            if (procedure == IntPtr.Zero) {
+                throw new Win32Exception(Marshal.GetLastWin32Error());
             }
 
             return procedure;

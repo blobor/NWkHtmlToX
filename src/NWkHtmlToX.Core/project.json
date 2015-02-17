@@ -23,7 +23,8 @@
                 "System.Globalization": "4.0.10-*",
                 "System.Runtime": "4.0.20-*",
                 "System.Runtime.InteropServices": "4.0.20-*",
-                "System.Diagnostics.Contracts": "4.0.0-*"
+                "System.Diagnostics.Contracts": "4.0.0-*",
+                "Microsoft.Win32.Primitives": "4.0.0-*"
             }
         }
     }
