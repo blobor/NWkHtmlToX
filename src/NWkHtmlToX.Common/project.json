@@ -5,8 +5,9 @@
         "warningsAsErrors": true
     },
 
+    "shared": "**/*.cs",
+
     "dependencies": {
-        "NWkHtmlToX.Core": { "version": "0.1-*", "type": "build" }
     },
 
     "frameworks": {
@@ -18,7 +19,7 @@
         "aspnetcore50": {
             "dependencies": {
                 "System.Runtime": "4.0.20-*",
-                "Microsoft.Win32.Registry": "4.0.0-*"
+                "System.Runtime.InteropServices": "4.0.20-*"
             }
         }
     }

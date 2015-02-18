@@ -1,13 +1,12 @@
 ﻿{
-    "version": "0.1-alpha-*",
+    "version": "0.0.1-alpha-*",
 
     "compilationOptions": {
         "warningsAsErrors": true
     },
 
-    "shared": "*.cs",
-
     "dependencies": {
+        "NWkHtmlToX.Common": { "version": "0.0.1-*", "type": "build" }
     },
 
     "frameworks": {
@@ -23,8 +22,8 @@
                 "System.Globalization": "4.0.10-*",
                 "System.Runtime": "4.0.20-*",
                 "System.Runtime.InteropServices": "4.0.20-*",
-                "System.Diagnostics.Contracts": "4.0.0-*",
-                "Microsoft.Win32.Primitives": "4.0.0-*"
+                "Microsoft.Win32.Primitives": "4.0.0-*",
+                "System.Security.Principal": "4.0.0-*"
             }
         }
     }

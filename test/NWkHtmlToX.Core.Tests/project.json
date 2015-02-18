@@ -1,12 +1,12 @@
 ﻿{
-    "version": "0.1-alpha-*",
+    "version": "0.0.1-alpha-*",
 
     "compilationOptions": {
         "warningsAsErrors": true
     },
 
     "dependencies": {
-        "NWkHtmlToX.Core": { "version": "0.1-*", "type": "build" },
+        "NWkHtmlToX.Core": "",
         "System.Runtime": "4.0.20-*",
         "System.Threading.Tasks": "4.0.10-*",
 
