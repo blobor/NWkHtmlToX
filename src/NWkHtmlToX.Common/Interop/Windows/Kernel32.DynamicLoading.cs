@@ -9,9 +9,10 @@ namespace NWkHtmlToX {
             internal static extern IntPtr LoadLibrary([MarshalAs(UnmanagedType.LPStr)]string dllToLoad);
 
             [DllImport(Libraries.Kernel32, EntryPoint = "FreeLibrary", SetLastError = true)]
+            [return: MarshalAs(UnmanagedType.Bool)]
             internal static extern bool FreeLibrary(IntPtr hModule);
 
-            [DllImport(Libraries.Kernel32, EntryPoint = "GetProcAddress", SetLastError = true, CharSet = CharSet.Ansi)]
+            [DllImport(Libraries.Kernel32, EntryPoint = "GetProcAddress", ExactSpelling = true, SetLastError = true, CharSet = CharSet.Ansi)]
             internal static extern IntPtr GetProcAddress(IntPtr hModule, string procedureName);
         }
     }
