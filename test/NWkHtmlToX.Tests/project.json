@@ -7,6 +7,7 @@
 
     "dependencies": {
         "NWkHtmlToX": "",
+
         "System.Runtime": "4.0.20-*",
 
         "xunit": "2.0.0-*",
@@ -22,11 +23,6 @@
         "net451": { },
         "net452": { },
 
-        "aspnet50": { },
-        "aspnetcore50": {
-            "dependencies": {
-                "System.Globalization": "4.0.10-*"
-            }
-        }
+        "aspnet50": { }
     }
 }

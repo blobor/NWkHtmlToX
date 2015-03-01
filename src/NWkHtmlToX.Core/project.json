@@ -14,17 +14,6 @@
         "net451": { },
         "net452": { },
 
-        "aspnet50": { },
-        "aspnetcore50": {
-            "dependencies": {
-                "System.IO": "4.0.10-*",
-                "System.IO.FileSystem": "4.0.0-*",
-                "System.Globalization": "4.0.10-*",
-                "System.Runtime": "4.0.20-*",
-                "System.Runtime.InteropServices": "4.0.20-*",
-                "Microsoft.Win32.Primitives": "4.0.0-*",
-                "System.Security.Principal": "4.0.0-*"
-            }
-        }
+        "aspnet50": { }
     }
 }
