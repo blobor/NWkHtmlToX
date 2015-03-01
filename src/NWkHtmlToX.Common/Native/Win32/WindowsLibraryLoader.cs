@@ -2,11 +2,13 @@
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.InteropServices;
+using NWkHtmlToX.Common.Interop.Windows;
+using NWkHtmlToX.Common.SafeHandles;
 
-namespace NWkHtmlToX.Core.Native.Win32 {
-    public class WindowsLibraryLoader : ILibraryLoader {
+namespace NWkHtmlToX.Common.Native.Win32 {
+    internal class WindowsLibraryLoader : ILibraryLoader {
 
-        public IntPtr LoadLibrary(string dllPath) {
+        public SafeLibraryHandle LoadLibrary(string dllPath) {
             
             if (dllPath == null)
                 throw new ArgumentNullException(nameof(dllPath));
@@ -15,17 +17,22 @@ namespace NWkHtmlToX.Core.Native.Win32 {
             
             var handler = Interlop.Kernel32.LoadLibrary(dllPath);
 
-            if (handler == IntPtr.Zero) {
+            if (handler.IsInvalid) {
                 throw new Win32Exception(Marshal.GetLastWin32Error());
             }
 
             return handler;
         }
 
-        public bool FreeLibrary(IntPtr handle) => handle != IntPtr.Zero && Interlop.Kernel32.FreeLibrary(handle);
+        public bool FreeLibrary(SafeLibraryHandle handle) {
+            if (handle.IsInvalid || handle.IsClosed) return false;
 
-        public IntPtr GetProcAddress(IntPtr handle, string procedureName) {
-            if (handle == IntPtr.Zero)
+            handle.Dispose();
+            return true;
+        }
+
+        public IntPtr GetProcAddress(SafeLibraryHandle handle, string procedureName) {
+            if (handle.IsInvalid || handle.IsClosed)
                 throw new ArgumentException("Invalid library handle.", nameof(handle));
             if (procedureName == null)
                 throw new ArgumentNullException(nameof(procedureName));

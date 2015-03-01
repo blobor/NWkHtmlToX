@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace NWkHtmlToX {
+namespace NWkHtmlToX.Common.Interop.Unix {
     internal partial class Interlop {
         internal partial class Libdl {
 
