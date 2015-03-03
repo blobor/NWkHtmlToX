@@ -28,7 +28,7 @@ namespace NWkHtmlToX.Common.Native.Win32 {
             if (handle.IsInvalid || handle.IsClosed) return false;
 
             handle.Dispose();
-            return true;
+            return handle.IsClosed;
         }
 
         public IntPtr GetProcAddress(SafeLibraryHandle handle, string procedureName) {
