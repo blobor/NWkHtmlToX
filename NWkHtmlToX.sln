@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.22512.0
+VisualStudioVersion = 14.0.22609.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0AF1775B-8D46-4F52-B7DD-71992A0EFB65}"
 EndProject
@@ -24,6 +24,8 @@ EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "NWkHtmlToX.Core.Tests", "test\NWkHtmlToX.Core.Tests\NWkHtmlToX.Core.Tests.kproj", "{C8A2BE6D-EA57-472E-8EDA-AFAE44E07643}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "NWkHtmlToX.Common", "src\NWkHtmlToX.Common\NWkHtmlToX.Common.kproj", "{2320FCC1-7BB5-4C40-8232-1036C42B9C32}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "NWkHtmlToX.Common.Tests", "test\NWkHtmlToX.Common.Tests\NWkHtmlToX.Common.Tests.kproj", "{9A28B3A9-9FA6-4D04-8E12-0259E8387E04}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{2320FCC1-7BB5-4C40-8232-1036C42B9C32}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2320FCC1-7BB5-4C40-8232-1036C42B9C32}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2320FCC1-7BB5-4C40-8232-1036C42B9C32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A28B3A9-9FA6-4D04-8E12-0259E8387E04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A28B3A9-9FA6-4D04-8E12-0259E8387E04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A28B3A9-9FA6-4D04-8E12-0259E8387E04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A28B3A9-9FA6-4D04-8E12-0259E8387E04}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -61,5 +67,6 @@ Global
 		{6ADC48A5-B4A9-40B9-89DD-D126EDFA20F0} = {0AF1775B-8D46-4F52-B7DD-71992A0EFB65}
 		{C8A2BE6D-EA57-472E-8EDA-AFAE44E07643} = {C188AE4A-2EE1-48BF-97DF-DA87A6E9F11E}
 		{2320FCC1-7BB5-4C40-8232-1036C42B9C32} = {0AF1775B-8D46-4F52-B7DD-71992A0EFB65}
+		{9A28B3A9-9FA6-4D04-8E12-0259E8387E04} = {C188AE4A-2EE1-48BF-97DF-DA87A6E9F11E}
 	EndGlobalSection
 EndGlobal
