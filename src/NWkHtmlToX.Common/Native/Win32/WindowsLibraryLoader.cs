@@ -6,7 +6,7 @@ using NWkHtmlToX.Common.Interop.Windows;
 using NWkHtmlToX.Common.SafeHandles;
 
 namespace NWkHtmlToX.Common.Native.Win32 {
-    internal class WindowsLibraryLoader : ILibraryLoader {
+    internal sealed class WindowsLibraryLoader : ILibraryLoader {
 
         public SafeLibraryHandle LoadLibrary(string dllPath) {
             

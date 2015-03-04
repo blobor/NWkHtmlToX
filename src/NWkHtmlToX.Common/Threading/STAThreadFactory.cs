@@ -2,7 +2,7 @@
 using System.Threading;
 
 namespace NWkHtmlToX.Common.Threading {
-    internal class STAThreadFactory : IThreadFactory {
+    internal sealed class STAThreadFactory : IThreadFactory {
         public Thread Create(Action start) {
             if (start == null) throw new ArgumentNullException(nameof(start));
 
