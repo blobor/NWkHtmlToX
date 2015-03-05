@@ -16,6 +16,10 @@ namespace NWkHtmlToX.Common.Threading {
             return thread;
         }
 
+        public Thread Create<T>(Action<T> start) {
+            return Create(obj => start((T) obj));
+        }
+
         public Thread Create(Action<object> start) {
             Guard.ArgumentNotNull(start, nameof(start));
 
