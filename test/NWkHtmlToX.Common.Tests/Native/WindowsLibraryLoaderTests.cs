@@ -52,6 +52,16 @@ namespace NWkHtmlToX.Common.Tests.Native {
         #endregion // LoadLibrary
 
         #region FreeLibrary
+
+        [Fact]
+        public void FreeLibrary_ShouldThrowExceptionIfHandleIsNull() {
+            // Arrange
+            Action function = () => _libraryLoader.FreeLibrary(null);
+
+            // Act, Assert
+            Assert.Throws<ArgumentNullException>(function);
+        }
+
         [Fact]
         public void FreeLibrary_ShouldReturnFalseIfHadleIsInvalid() {
             // Arrange
