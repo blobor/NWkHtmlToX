@@ -5,29 +5,39 @@ using Xunit;
 
 namespace NWkHtmlToX.Common.Tests.Threading {
     public class STATaskSchedulerTests {
+        private readonly TaskFactory _taskFactory;
 
-        private readonly TaskScheduler _taskScheduler;
-        
         public STATaskSchedulerTests() {
-            _taskScheduler = new STATaskScheduler(new STAThreadFactory());
+            TaskScheduler taskScheduler = new STATaskScheduler(new STAThreadFactory());
+            _taskFactory = new TaskFactory(taskScheduler);
         }
 
         [Fact]
         public void TaskScheduler_ShouldScheduleTaskWithSTAThreads() {
-            // Arrange
-            var factory = new TaskFactory(_taskScheduler);
-
             // Act, Assert
-            factory.StartNew(() => Assert.Equal(ApartmentState.STA, Thread.CurrentThread.GetApartmentState()));
+            _taskFactory.StartNew(() => Assert.Equal(ApartmentState.STA, Thread.CurrentThread.GetApartmentState()));
         }
 
         [Fact]
         public async Task TaskScheduler_ShouldScheduleTaskWithSTAThreadsAsync() {
-            // Arrange
-            var factory = new TaskFactory(_taskScheduler);
-
             // Act, Assert
-            await factory.StartNew(() => Assert.Equal(ApartmentState.STA, Thread.CurrentThread.GetApartmentState()));
+            await _taskFactory.StartNew(async () => {
+                Assert.Equal(ApartmentState.STA, Thread.CurrentThread.GetApartmentState());
+                await Task.Yield();
+                Assert.Equal(ApartmentState.STA, Thread.CurrentThread.GetApartmentState());
+            });
+        }
+
+        [Fact]
+        public async Task TaskScheduler_ThreadShouldHaveSameAparmentStateAfterAsyncOperation() {
+            // Arrange
+            var state = Thread.CurrentThread.GetApartmentState();
+
+            // Acts
+            await _taskFactory.StartNew(async () => await Task.Yield());
+
+            // Assert
+            Assert.Equal(state, Thread.CurrentThread.GetApartmentState());
         }
     }
 }
