@@ -5,14 +5,12 @@ using System.Threading.Tasks;
 using NWkHtmlToX.Common.Utilities;
 
 namespace NWkHtmlToX.Common.Threading {
-    internal sealed class STATaskScheduler : TaskScheduler {
+    internal sealed class STAThreadPerTaskScheduler : TaskScheduler {
 
         private readonly IThreadFactory _threadFactory;
 
-        internal STATaskScheduler(IThreadFactory factory) {
-            Guard.ArgumentNotNull(factory, nameof(factory));
-
-            _threadFactory = factory;
+        internal STAThreadPerTaskScheduler() {
+            _threadFactory = new STAThreadFactory();
         }
 
         protected override void QueueTask(Task task) {

@@ -4,11 +4,11 @@ using NWkHtmlToX.Common.Threading;
 using Xunit;
 
 namespace NWkHtmlToX.Common.Tests.Threading {
-    public class STATaskSchedulerTests {
+    public class STAThreadPerTaskSchedulerTests {
         private readonly TaskFactory _taskFactory;
 
-        public STATaskSchedulerTests() {
-            TaskScheduler taskScheduler = new STATaskScheduler(new STAThreadFactory());
+        public STAThreadPerTaskSchedulerTests() {
+            TaskScheduler taskScheduler = new STAThreadPerTaskScheduler();
             _taskFactory = new TaskFactory(taskScheduler);
         }
 
