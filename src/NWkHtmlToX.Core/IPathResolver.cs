@@ -1,4 +1,4 @@
-﻿namespace NWkHtmlToX.Infrastructure {
+﻿namespace NWkHtmlToX.Core {
      
     /// <summary>
     /// Implementations of this interface are used for resolving path.
