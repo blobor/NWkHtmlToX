@@ -2,7 +2,7 @@
 
 namespace NWkHtmlToX.Common.Utilities {
     internal static class Guard {
-        internal static void ArgumentNotNull<T>(T value, string argumentName) where T : class {
+        internal static void ArgumentNotNull<T>(T value, string argumentName) {
             if(value == null) throw new ArgumentNullException(argumentName);
         }
 
