@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using NWkHtmlToX.Common.Utilities;
 using Xunit;
 
@@ -13,6 +14,8 @@ namespace NWkHtmlToX.Common.Tests.Utilities {
             var obj = new {
                 TestString = "ABC",
                 TestInt32 = 11,
+                TestNullableInt32 = (int?) null,
+                TestNullableBool = (bool?) false,
                 TestDateTime = DateTime.Now,
                 TestInnerObject = new {
                     TestString = "ABC",
@@ -22,7 +25,8 @@ namespace NWkHtmlToX.Common.Tests.Utilities {
             IDictionary<string, string> expectedResult = new Dictionary<string, string> {
                 ["testString"] =  "ABC",
                 ["testInt32"] = "11",
-                ["testDateTime"] = DateTime.Now.ToString(),
+                ["testNullableBool"] = "false",
+                ["testDateTime"] = DateTime.Now.ToString(CultureInfo.InvariantCulture),
                 ["testInnerObject.testString"] = "ABC",
                 ["testInnerObject.testInt32"] = "11"
             };
@@ -33,6 +37,5 @@ namespace NWkHtmlToX.Common.Tests.Utilities {
             // Assert
             Assert.Equal(expectedResult, actualResult);
         }
-
     }
 }

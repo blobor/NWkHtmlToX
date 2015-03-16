@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Reflection;
 
 namespace NWkHtmlToX.Common.Utilities {
@@ -31,8 +32,9 @@ namespace NWkHtmlToX.Common.Utilities {
                 var propertyType = property.PropertyType;
                 var propertyName = prefix == null ? ToCamelCase(property.Name) : String.Concat(prefix, Type.Delimiter, ToCamelCase(property.Name));
 
-                if ((propertyType.IsValueType && !value.Equals(Activator.CreateInstance(propertyType))) || propertyType == typeof(string)) {
-                    properties.Add(propertyName, propertyType == typeof(bool) ? value.ToString().ToLowerInvariant() : value.ToString());
+                if (propertyType.IsValueType || propertyType == typeof(string)) {
+                    properties.Add(propertyName, propertyType == typeof(bool) || propertyType == typeof(bool?) ? ToInvariantString(value).ToLowerInvariant()
+                                                                                                               : ToInvariantString(value));
                 } else {
                     GetProperties(properties, value, bindingFlags, propertyName);
                 }
@@ -41,6 +43,11 @@ namespace NWkHtmlToX.Common.Utilities {
 
         private static string ToCamelCase(string value) {
             return String.IsNullOrEmpty(value) ? value : String.Concat(Char.ToLowerInvariant(value[0]), value.Substring(1));
+        }
+
+        private static string ToInvariantString(object value) {
+            var formatable = value as IFormattable;
+            return formatable?.ToString(null, CultureInfo.InvariantCulture) ?? value.ToString();
         }
     }
 }
