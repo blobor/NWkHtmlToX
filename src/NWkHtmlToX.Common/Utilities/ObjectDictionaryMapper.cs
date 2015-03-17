@@ -15,7 +15,7 @@ namespace NWkHtmlToX.Common.Utilities {
         }
 
         internal static IDictionary<string, string> GetDictionary<T>(T instance, BindingFlags bindingFlags) {
-            Guard.ArgumentNotNull(instance, nameof(instance));
+            ThrowIf.Argument.IsNull(instance, nameof(instance));
 
             IDictionary<string, string> result = new Dictionary<string, string>();
 

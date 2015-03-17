@@ -10,7 +10,7 @@ namespace NWkHtmlToX.Common.Native.Win32 {
     internal sealed class WindowsLibraryLoader : ILibraryLoader {
 
         public SafeLibraryHandle LoadLibrary(string dllPath) {
-            Guard.ArgumentNotNull(dllPath, nameof(dllPath));
+            ThrowIf.Argument.IsNull(dllPath, nameof(dllPath));
             if (!File.Exists(dllPath)) throw new FileNotFoundException("Could not locate library.", dllPath);
             
             var handler = Interlop.Kernel32.LoadLibrary(dllPath);
@@ -23,7 +23,7 @@ namespace NWkHtmlToX.Common.Native.Win32 {
         }
 
         public bool FreeLibrary(SafeLibraryHandle handle) {
-            Guard.ArgumentNotNull(handle, nameof(handle));
+            ThrowIf.Argument.IsNull(handle, nameof(handle));
             if (handle.IsInvalid || handle.IsClosed) return false;
 
             handle.Dispose();
@@ -31,8 +31,8 @@ namespace NWkHtmlToX.Common.Native.Win32 {
         }
 
         public IntPtr GetProcAddress(SafeLibraryHandle handle, string procedureName) {
-            Guard.ArgumentNotNull(handle, nameof(handle));
-            Guard.ArgumentNotNullOrEmpty(procedureName, nameof(procedureName));
+            ThrowIf.Argument.IsNull(handle, nameof(handle));
+            ThrowIf.Argument.IsNullOrEmpty(procedureName, nameof(procedureName));
             if (handle.IsInvalid || handle.IsClosed) throw new ArgumentException("Invalid library handle.", nameof(handle));
 
             var procedure = Interlop.Kernel32.GetProcAddress(handle, procedureName);

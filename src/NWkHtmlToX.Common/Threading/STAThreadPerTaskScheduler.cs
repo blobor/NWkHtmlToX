@@ -14,13 +14,13 @@ namespace NWkHtmlToX.Common.Threading {
         }
 
         protected override void QueueTask(Task task) {
-            Guard.ArgumentNotNull(task, nameof(task));
+            ThrowIf.Argument.IsNull(task, nameof(task));
 
             _threadFactory.Create((Task queuedTask) => TryExecuteTask(queuedTask)).Start(task);
         }
 
         protected override bool TryExecuteTaskInline(Task task, bool taskWasPreviouslyQueued) {
-            Guard.ArgumentNotNull(task, nameof(task));
+            ThrowIf.Argument.IsNull(task, nameof(task));
             if (Thread.CurrentThread.GetApartmentState() != ApartmentState.STA) return false;
 
             return taskWasPreviouslyQueued || TryExecuteTask(task);
