@@ -8,7 +8,7 @@ namespace NWkHtmlToX.PathResolvers {
         protected IPathResolver[] PathResolvers;
 
         public CombinedDllPathResolver(params IPathResolver[] pathResolvers) {
-            Guard.ArgumentNotNull(pathResolvers, nameof(pathResolvers));
+            ThrowIf.Argument.IsNull(pathResolvers, nameof(pathResolvers));
 
             PathResolvers = pathResolvers;
         }
