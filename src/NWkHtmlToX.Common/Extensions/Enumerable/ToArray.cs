@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using NWkHtmlToX.Common.Utilities;
 
-namespace NWkHtmlToX.Common.Utilities {
-    internal static class EnumerableExtensions {
+namespace NWkHtmlToX.Common.Extensions.Enumerable {
+    internal static partial class EnumerableExtensions {
 
         [SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
         internal static T[] ToArray<T>(this IEnumerable<T> source, int count) {
