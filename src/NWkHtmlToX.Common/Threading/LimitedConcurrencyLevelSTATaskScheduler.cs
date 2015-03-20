@@ -15,7 +15,7 @@ namespace NWkHtmlToX.Common.Threading {
         private readonly ThreadLocal<bool> _isCurrentThreadProcessingTask = new ThreadLocal<bool>(() => false);
 
         public LimitedConcurrencyLevelSTATaskScheduler(int maximumConcurrencyLevel) {
-            ThrowIf.Argument.IsOutOfRange(maximumConcurrencyLevel, nameof(maximumConcurrencyLevel), 1, Int32.MinValue);
+            ThrowIf.Argument.IsOutOfRange(maximumConcurrencyLevel, nameof(maximumConcurrencyLevel), 1, Int32.MaxValue);
             
             _numberOfCurrentlyRunningThreads = 0;
             _tasks = new LinkedList<Task>();
@@ -77,7 +77,7 @@ namespace NWkHtmlToX.Common.Threading {
                     Task queuedTask;
                     lock (_lockObject) {
 
-                        if (_tasks.IsEmpty()) {
+                        if (_tasks.Count < 1) {
                             --_numberOfCurrentlyRunningThreads;
                             break;
                         }
