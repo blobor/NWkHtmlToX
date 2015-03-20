@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,15 +9,16 @@ namespace NWkHtmlToX.Common.Threading {
     internal sealed class LimitedConcurrencyLevelSTATaskScheduler : TaskScheduler {
 
         private int _numberOfCurrentlyRunningThreads;
-        private readonly ConcurrentQueue<Task> _tasks;
+        private readonly object _lockObject = new object();
+        private readonly LinkedList<Task> _tasks;
         private readonly IThreadFactory _threadFactory;
         private readonly ThreadLocal<bool> _isCurrentThreadProcessingTask = new ThreadLocal<bool>(() => false);
 
         public LimitedConcurrencyLevelSTATaskScheduler(int maximumConcurrencyLevel) {
             ThrowIf.Argument.IsOutOfRange(maximumConcurrencyLevel, nameof(maximumConcurrencyLevel), 1, Int32.MinValue);
-
+            
             _numberOfCurrentlyRunningThreads = 0;
-            _tasks = new ConcurrentQueue<Task>();
+            _tasks = new LinkedList<Task>();
             _threadFactory = new STAThreadFactory();
             MaximumConcurrencyLevel = maximumConcurrencyLevel;
         }
@@ -28,12 +28,26 @@ namespace NWkHtmlToX.Common.Threading {
         protected override void QueueTask(Task task) {
             ThrowIf.Argument.IsNull(task, nameof(task));
 
-            _tasks.Enqueue(task);
+            lock (_lockObject) {
+                _tasks.AddLast(task);
 
-            if (_numberOfCurrentlyRunningThreads < MaximumConcurrencyLevel) {
-                Interlocked.Increment(ref _numberOfCurrentlyRunningThreads);
-                _threadFactory.Create(ExecuteWork).Start();
+                if (_numberOfCurrentlyRunningThreads < MaximumConcurrencyLevel) {
+                    ++_numberOfCurrentlyRunningThreads;
+                    _threadFactory.Create(ExecuteWork).Start();
+                }
             }
+        }
+
+        protected override bool TryDequeue(Task task) {
+            if (Monitor.TryEnter(_lockObject)) {
+                try {
+                    return _tasks.Remove(task);
+                }
+                finally {
+                    Monitor.Exit(_lockObject);
+                }
+            }
+            return false;
         }
 
         protected override bool TryExecuteTaskInline(Task task, bool taskWasPreviouslyQueued) {
@@ -50,17 +64,29 @@ namespace NWkHtmlToX.Common.Threading {
         }
 
         protected override IEnumerable<Task> GetScheduledTasks() {
-            return _tasks.ToArray(_tasks.Count);
+            lock (_lockObject) {
+                return _tasks.ToArray(_tasks.Count);
+            }
         }
 
         private void ExecuteWork() {
             _isCurrentThreadProcessingTask.Value = true;
             try {
-                while (!_tasks.IsEmpty) {
+                while (true) {
+
                     Task queuedTask;
-                    if (_tasks.TryDequeue(out queuedTask)) {
-                        TryExecuteTask(queuedTask);
+                    lock (_lockObject) {
+
+                        if (_tasks.IsEmpty()) {
+                            --_numberOfCurrentlyRunningThreads;
+                            break;
+                        }
+
+                        queuedTask = _tasks.First.Value;
+                        _tasks.RemoveFirst();
                     }
+
+                    TryExecuteTask(queuedTask);
                 }
             } finally {
                 _isCurrentThreadProcessingTask.Value = false;
