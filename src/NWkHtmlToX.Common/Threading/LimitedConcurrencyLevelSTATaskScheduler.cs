@@ -14,9 +14,12 @@ namespace NWkHtmlToX.Common.Threading {
         private readonly IThreadFactory _threadFactory;
         private readonly ThreadLocal<bool> _isCurrentThreadProcessingTask = new ThreadLocal<bool>(() => false);
 
+        private static readonly Lazy<TaskScheduler> _singleSTAThreadTaskSchedulerInstance = new Lazy<TaskScheduler>(() => new LimitedConcurrencyLevelSTATaskScheduler(1), true);
+        internal static TaskScheduler SingleSTAThreadTaskScheduler => _singleSTAThreadTaskSchedulerInstance.Value;
+
         public LimitedConcurrencyLevelSTATaskScheduler(int maximumConcurrencyLevel) {
             ThrowIf.Argument.IsOutOfRange(maximumConcurrencyLevel, nameof(maximumConcurrencyLevel), 1, Int32.MaxValue);
-            
+
             _numberOfCurrentlyRunningThreads = 0;
             _tasks = new LinkedList<Task>();
             _threadFactory = new STAThreadFactory();

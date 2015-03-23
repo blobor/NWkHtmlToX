@@ -6,11 +6,11 @@ using Xunit;
 
 namespace NWkHtmlToX.Common.Tests.Threading {
     public class STATaskSchedulerTests {
-        
+
         public static IEnumerable<object[]> STATaskSchedulers {
             get {
                 yield return new object[] { new STAThreadPerTaskScheduler() };
-                yield return new object[] { new LimitedConcurrencyLevelSTATaskScheduler(1) };
+                yield return new object[] { LimitedConcurrencyLevelSTATaskScheduler.SingleSTAThreadTaskScheduler };
             }
         }
 
