@@ -43,5 +43,15 @@ namespace NWkHtmlToX.Common.Native.Win32 {
 
             return procedure;
         }
+
+        public bool TryGetProcAddress(SafeLibraryHandle handle, string procedureName, out IntPtr procedure) {
+            ThrowIf.Argument.IsNull(handle, nameof(handle));
+            ThrowIf.Argument.IsNullOrEmpty(procedureName, nameof(procedureName));
+            if (handle.IsInvalid || handle.IsClosed) throw new ArgumentException("Invalid library handle.", nameof(handle));
+
+            procedure = Interlop.Kernel32.GetProcAddress(handle, procedureName);
+
+            return procedure != IntPtr.Zero;
+        }
     }
 }

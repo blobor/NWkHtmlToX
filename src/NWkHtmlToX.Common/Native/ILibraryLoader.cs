@@ -9,5 +9,7 @@ namespace NWkHtmlToX.Common.Native {
         bool FreeLibrary(SafeLibraryHandle handle);
 
         IntPtr GetProcAddress(SafeLibraryHandle handle, string procedureName);
+
+        bool TryGetProcAddress(SafeLibraryHandle handle, string procedureName, out IntPtr procedure);
     }
 }
