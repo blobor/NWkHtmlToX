@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using NWkHtmlToX.Common.Threading;
@@ -10,7 +11,8 @@ namespace NWkHtmlToX.Common.Tests.Threading {
         public static IEnumerable<object[]> STATaskSchedulers {
             get {
                 yield return new object[] { new STAThreadPerTaskScheduler() };
-                yield return new object[] { LimitedConcurrencyLevelSTATaskScheduler.SingleSTAThreadTaskScheduler };
+                yield return new object[] { new LimitedConcurrencyLevelSTATaskScheduler(Int32.MaxValue) };
+                yield return new object[] { SingleSTAThreadTaskScheduler.Instance };
             }
         }
 

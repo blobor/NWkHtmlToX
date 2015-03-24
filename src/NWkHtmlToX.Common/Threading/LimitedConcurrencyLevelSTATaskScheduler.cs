@@ -6,7 +6,7 @@ using NWkHtmlToX.Common.Extensions.Enumerable;
 using NWkHtmlToX.Common.Utilities;
 
 namespace NWkHtmlToX.Common.Threading {
-    internal sealed class LimitedConcurrencyLevelSTATaskScheduler : TaskScheduler {
+    internal class LimitedConcurrencyLevelSTATaskScheduler : TaskScheduler {
 
         private int _numberOfCurrentlyRunningThreads;
         private readonly object _lockObject = new object();
@@ -14,10 +14,7 @@ namespace NWkHtmlToX.Common.Threading {
         private readonly IThreadFactory _threadFactory;
         private readonly ThreadLocal<bool> _isCurrentThreadProcessingTask = new ThreadLocal<bool>(() => false);
 
-        private static readonly Lazy<TaskScheduler> _singleSTAThreadTaskSchedulerInstance = new Lazy<TaskScheduler>(() => new LimitedConcurrencyLevelSTATaskScheduler(1), true);
-        internal static TaskScheduler SingleSTAThreadTaskScheduler => _singleSTAThreadTaskSchedulerInstance.Value;
-
-        public LimitedConcurrencyLevelSTATaskScheduler(int maximumConcurrencyLevel) {
+        internal LimitedConcurrencyLevelSTATaskScheduler(int maximumConcurrencyLevel) {
             ThrowIf.Argument.IsOutOfRange(maximumConcurrencyLevel, nameof(maximumConcurrencyLevel), 1, Int32.MaxValue);
 
             _numberOfCurrentlyRunningThreads = 0;
@@ -28,7 +25,7 @@ namespace NWkHtmlToX.Common.Threading {
 
         public override int MaximumConcurrencyLevel { get; }
 
-        protected override void QueueTask(Task task) {
+        protected sealed override void QueueTask(Task task) {
             ThrowIf.Argument.IsNull(task, nameof(task));
 
             lock (_lockObject) {
@@ -41,7 +38,7 @@ namespace NWkHtmlToX.Common.Threading {
             }
         }
 
-        protected override bool TryDequeue(Task task) {
+        protected sealed override bool TryDequeue(Task task) {
             if (Monitor.TryEnter(_lockObject)) {
                 try {
                     return _tasks.Remove(task);
@@ -53,7 +50,7 @@ namespace NWkHtmlToX.Common.Threading {
             return false;
         }
 
-        protected override bool TryExecuteTaskInline(Task task, bool taskWasPreviouslyQueued) {
+        protected sealed override bool TryExecuteTaskInline(Task task, bool taskWasPreviouslyQueued) {
             ThrowIf.Argument.IsNull(task, nameof(task));
 
             // If this thread isn't already processing a task, we don't support inlining
@@ -66,7 +63,7 @@ namespace NWkHtmlToX.Common.Threading {
             return taskWasPreviouslyQueued ? TryDequeue(task) && TryExecuteTask(task) : TryExecuteTask(task);
         }
 
-        protected override IEnumerable<Task> GetScheduledTasks() {
+        protected sealed override IEnumerable<Task> GetScheduledTasks() {
             lock (_lockObject) {
                 return _tasks.ToArray(_tasks.Count);
             }
