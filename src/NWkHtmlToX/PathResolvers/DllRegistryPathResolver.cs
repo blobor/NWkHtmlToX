@@ -8,9 +8,7 @@ namespace NWkHtmlToX.PathResolvers {
         public const string WKHTMLTOPDF_REGISTRY_PATH = @"SOFTWARE\wkhtmltopdf";
 
         private RegistryKey GetLocalMachineRegistryKey() {
-            var registryView = Environment.Is64BitOperatingSystem
-                                                          ? RegistryView.Registry64
-                                                          : RegistryView.Registry32;
+            var registryView = Environment.Is64BitProcess ? RegistryView.Registry64 : RegistryView.Registry32;
 
             return RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, registryView);
         }
