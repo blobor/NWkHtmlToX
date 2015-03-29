@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Runtime.InteropServices;
 
 namespace NWkHtmlToX.Common.Native {
 
@@ -9,6 +10,7 @@ namespace NWkHtmlToX.Common.Native {
     /// <param name="use_graphics">Should we use a graphics system.</param>
     /// <returns>True on success and False otherwise.</returns>
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
     internal delegate bool wkhtmltopdf_init(bool use_graphics);
 
     /// <summary>
@@ -16,6 +18,7 @@ namespace NWkHtmlToX.Common.Native {
     /// </summary>
     /// <returns>True on success and False otherwise.</returns>
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
     internal delegate bool wkhtmltopdf_deinit();
 
     /// <summary>
@@ -23,6 +26,7 @@ namespace NWkHtmlToX.Common.Native {
     /// </summary>
     /// <returns>True if the library was build against the wkhtmltopdf version of QT and False otherwise.</returns>
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
     internal delegate bool wkhtmltopdf_extended_qt();
 
     /// <summary>
@@ -31,5 +35,6 @@ namespace NWkHtmlToX.Common.Native {
     /// <returns>Qt version.</returns>
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     [return: MarshalAs(UnmanagedType.LPStr)]
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
     internal delegate string wkhtmltopdf_version();
 }
