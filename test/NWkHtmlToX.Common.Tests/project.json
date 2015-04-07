@@ -8,11 +8,11 @@
     "dependencies": {
         "NWkHtmlToX.Common": { "type": "build", "version": "0.0.1-alpha-*" },
 
-        "System.Runtime": "4.0.20-*",
-        "System.Threading.Tasks": "4.0.10-*",
+        "System.Runtime": "4.0.20-beta-22605",
+        "System.Threading.Tasks": "4.0.10-beta-22605",
 
-        "xunit": "2.0.0-*",
-        "xunit.runner.aspnet": "2.0.0-*"
+        "xunit": "2.0.0-rc3-build2880",
+        "xunit.runner.aspnet": "2.0.0-rc3-build52"
     },
 
     "commands": {
