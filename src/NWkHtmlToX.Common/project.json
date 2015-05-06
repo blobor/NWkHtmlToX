@@ -1,26 +1,23 @@
 ﻿{
-    "version": "0.0.1-alpha-*",
+  "version": "0.0.1-alpha-*",
 
-    "compilationOptions": {
-        "warningsAsErrors": true
-    },
+  "compilationOptions": {
+    "warningsAsErrors": true
+  },
 
-    "shared": "**/*.cs",
+  "shared": "**/*.cs",
 
-    "dependencies": {
-    },
+  "dependencies": {
+  },
 
-    "frameworks": {
-        "net45": { },
-        "net451": { },
-        "net452": { },
-
-        "aspnet50": { },
-        "aspnetcore50": {
-            "dependencies": {
-                "System.Runtime": "4.0.20-*",
-                "System.Runtime.InteropServices": "4.0.20-*"
-            }
-        }
+  "frameworks": {
+    "net45": { },
+    "dnx451": { },
+    "dnxcore50": {
+      "dependencies": {
+        "System.Runtime": "4.0.20-beta-22816",
+        "System.Runtime.InteropServices": "4.0.20-beta-22816"
+      }
     }
+  }
 }

@@ -1,19 +1,17 @@
 ﻿{
-    "version": "0.0.1-alpha-*",
+  "version": "0.0.1-alpha-*",
 
-    "compilationOptions": {
-        "warningsAsErrors": true
-    },
+  "compilationOptions": {
+    "warningsAsErrors": true
+  },
 
-    "dependencies": {
-        "NWkHtmlToX.Common": { "type": "build", "version": "0.0.1-*" }
-    },
+  "dependencies": {
+    "NWkHtmlToX.Common": { "type": "build", "version": "0.0.1-*" }
+  },
 
-    "frameworks": {
-        "net45": { },
-        "net451": { },
-        "net452": { },
-
-        "aspnet50": { }
-    }
+  "frameworks": {
+    "net45": { },
+    "dnx451": { },
+    "dnxcore50": { }
+  }
 }
